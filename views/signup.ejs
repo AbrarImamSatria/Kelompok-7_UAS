@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Netflix</title>
+  <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="assets/favicon.ico" rel="icon" type="image/x-icon">
+  <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Judul -->
+        <h1>Daftar</h1>
+        <p style=" text-align: left;">Silahkan Masukan Username & Password</p>
+        
+        <!-- Form Login -->
+        <form id="loginForm" action="/signup" method="POST">
+            <div class="input-box">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+            <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <i class='bx bxs-user'></i>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+
+        <!-- Footer -->
+        <div class="register-link">
+            <p>Belum punya akun? <a href="/login">Daftar di sini</a>.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= film.nama_film %> - Website Streaming Film</title>
+    <link rel="stylesheet" href="/css/film.css">
+    <link href="assets/favicon.ico" rel="icon" type="image/x-icon">
+</head>
+<body>
+  
+  <div class="video-text">
+    <iframe id="myVideo" width="315" height="315" src="https://www.youtube.com/embed/<%= film.url_yt.split('v=')[1] %>" frameborder="0" allowfullscreen></iframe>
+    <h2><%= film.nama_film %> - Trailer</h2>
+    <p><%= film.deskripsi %></p>
+      
+    <!-- Table added below the paragraph -->
+    <table>
+        <caption>Movie Details</caption>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Director</td>
+            <td><%= film.director || 'Narastudio' %></td> <!-- Ganti dengan data yang sesuai jika ada -->
+          </tr>
+          <tr>
+            <td>Release Year</td>
+            <td><%= film.release_year || '2022' %></td> <!-- Ganti dengan data yang sesuai jika ada -->
+          </tr>
+          <tr>
+            <td>Genre</td>
+            <td><%= film.genre || 'unknown' %></td> <!-- Ganti dengan data yang sesuai jika ada -->
+          </tr>
+          <tr>
+            <td>Rating</td>
+            <td><%= film.rating || '9/10' %></td> <!-- Ganti dengan data yang sesuai jika ada -->
+          </tr>
+        </tbody>
+    </table>
+    <h2>Tonton Full Movie Disini</h2>
+    <button onclick="window.location.href='https://tv6.idlix.asia/'">Klik Disini</button>
+  </div>
+  
+  <main>
+    <section id="film-section" class="top-movies">
+      <h2>Film & Acara Tv Terkait</h2>
+      <div class="movie-list">
+          <% films.forEach(film => { %>
+            <div class="movie-item">
+              <a href="/film/<%= film.id %>">
+                <img src="<%= film.img_url %>" alt="<%= film.nama_film %>">
+              </a>
+              <div class="movie-rank">WEBDL</div>
+              <div class="movie-title"><%= film.nama_film %></div>
+            </div>
+          <% }); %>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="footer-container">
+        <div class="footer-content">
+            <h3>Tentang Kami</h3>
+            <p> NARASTREAM adalah platform menonton film full movie dengan subtitle Indonesia secara gratis. Ini merupakan opsi yang tepat bagi yang tidak berlangganan layanan streaming seperti Netflix, Disney+, HBO, dan lainnya. Film-film terbaru selalu diperbarui dan bisa diakses melalui TikTok, Facebook, dan Instagram. Dengan NARASTREAM, menonton film favorit tanpa biaya tambahan menjadi lebih menyenangkan. Ayo sambut pengalaman menonton film yang lebih praktis dan terjangkau bersama NARASTREAM.</p>
+        </div>
+        <div class="footer-content">
+            <h3>Kontak Kami</h3>
+            <p>Alamat: Arjuna 7, Kasihan Bantul Yogyakarta. Indonesia</p>
+            <p>Email: narastream@example.com</p>
+            <p>Telepon: 123-456-7890</p>
+            <p>Instagram: <a href="https://instagram.com/narastream.id" style="color: #C13584; text-decoration: none;">@narastream.id</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2024 by NARASTREAM. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

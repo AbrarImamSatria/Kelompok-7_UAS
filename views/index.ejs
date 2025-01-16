@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Homepage</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <main>
+        <!-- Section Film Teratas -->
+        <section id="filmku" class="top-movies">
+          <h2>10 Film Teratas di Indonesia Hari Ini</h2>
+          <div class="movie-list">
+              <% topFilms.forEach((film, index) => { %>
+                  <div class="movie-item">
+                      <a href="/film/<%= film.id %>">
+                          <img src="<%= film.img_url %>" alt="<%= film.nama_film %>">
+                      </a>
+                      <div class="movie-rank"><%= index + 1 %></div>
+                      <div class="movie-title"><%= film.nama_film %></div>
+                  </div>
+              <% }); %>
+          </div>
+        </section>
+
+        <!-- Section Acara TV Teratas -->
+        <section id="acara-section" class="top-tv-shows">
+          <h2>10 Acara TV Teratas di Indonesia Hari Ini</h2>
+          <div class="tv-show-list">
+              <% topTvShows.forEach((film, index) => { %>
+                  <div class="tv-show-item">
+                      <a href="/film/<%= film.id %>">
+                          <img src="<%= film.img_url %>" alt="<%= film.nama_film %>">
+                      </a>
+                      <div class="tv-show-rank"><%= index + 1 %></div>
+                      <div class="tv-show-title"><%= film.nama_film %></div>
+                  </div>
+              <% }); %>
+          </div>
+        </section>
+
+        <section id="film-section" class="top-movies">
+            <h2>Film & Acara Tv</h2>
+            <div class="movie-list">
+                <% films.forEach(film => { %>
+                    <div class="movie-item">
+                        <a href="/film/<%= film.id %>">
+                            <img src="<%= film.img_url %>" alt="<%= film.nama_film %>">
+                        </a>
+                        <div class="movie-rank">WEBDL</div>
+                        <div class="movie-title"><%= film.nama_film %></div>
+                    </div>
+                <% }); %>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h3>Tentang Kami</h3>
+                <p>NARASTREAM adalah platform menonton film full movie dengan subtitle Indonesia secara gratis. Ini merupakan opsi yang tepat bagi yang tidak berlangganan layanan streaming seperti Netflix, Disney+, HBO, dan lainnya. Film-film terbaru selalu diperbarui dan bisa diakses melalui TikTok, Facebook, dan Instagram. Dengan NARASTREAM, menonton film favorit tanpa biaya tambahan menjadi lebih menyenangkan. Ayo sambut pengalaman menonton film yang lebih praktis dan terjangkau bersama NARASTREAM.</p>
+            </div>
+            <div class="footer-content">
+                <h3>Kontak Kami</h3>
+                <p>Alamat: Arjuna 7, Kasihan Bantul Yogyakarta. Indonesia</p>
+                <p>Email: narastream@example.com</p>
+                <p>Telepon: 123-456-7890</p>
+                <p>Instagram: <a href="https://instagram.com/narastream.id" style="color: #C13584; text-decoration: none;">@narastream.id</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2024 by NARASTREAM. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
