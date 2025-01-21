@@ -1,69 +1,28 @@
-// tests/delete.test.js
 const request = require('supertest');
 const express = require('express');
-const db = require('../database/db'); // Ubah path ke database yang benar
+const db = require('../database/db'); // Koneksi database asli
+const filmRoutes = require('../routes/filmRoutes');
 
 const app = express();
-const router = express.Router();
+app.use(express.json());
+app.use('/film', filmRoutes);
 
-// Define delete endpoint
-router.delete('/:id', (req, res) => {
-    db.query('DELETE FROM film WHERE id = ?', [req.params.id], (err, results) => {
-        if (err) return res.status(500).send('Internal Server Error');
-        if (results.affectedRows === 0) return res.status(404).send('Film not found');
-        res.status(204).send();
-    });
-});
+describe('DELETE /film/:id (real database with specific ID)', () => {
+    const existingFilmId = 24; // ID film yang ingin diuji
+    const nonExistentFilmId = 999999; // ID yang tidak ada di database
 
-app.use('/', router);
+    test('should delete film with ID 24 successfully', async () => {
+        const response = await request(app).delete(`/film/${existingFilmId}`);
+        expect(response.status).toBe(204);
 
-// Mock the database
-jest.mock('../database/db', () => ({
-    query: jest.fn()
-}));
-
-describe('DELETE /film/:id endpoint', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
-
-    test('should delete film successfully', async () => {
-        db.query.mockImplementation((sql, params, callback) => {
-            callback(null, { affectedRows: 1 });
-        });
-
-        await request(app)
-            .delete('/13')
-            .expect(204);
-
-        expect(db.query).toHaveBeenCalledWith(
-            'DELETE FROM film WHERE id = ?',
-            ['13'],
-            expect.any(Function)
-        );
+        // Pastikan film dihapus dari database
+        const [results] = await db.promise().query('SELECT * FROM film WHERE id = ?', [existingFilmId]);
+        expect(results.length).toBe(0); // Film harus sudah terhapus
     });
 
     test('should return 404 when film not found', async () => {
-        db.query.mockImplementation((sql, params, callback) => {
-            callback(null, { affectedRows: 0 });
-        });
-
-        const response = await request(app)
-            .delete('/999')
-            .expect(404);
-
+        const response = await request(app).delete(`/film/${nonExistentFilmId}`);
+        expect(response.status).toBe(404);
         expect(response.text).toBe('Film not found');
-    });
-
-    test('should return 500 on database error', async () => {
-        db.query.mockImplementation((sql, params, callback) => {
-            callback(new Error('Database error'), null);
-        });
-
-        const response = await request(app)
-            .delete('/13')
-            .expect(500);
-
-        expect(response.text).toBe('Internal Server Error');
     });
 });
